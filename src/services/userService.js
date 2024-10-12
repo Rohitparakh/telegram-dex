@@ -6,6 +6,9 @@ const subscribeUser = async (chatId) => {
     if (!user) {
         user = new User({ chatId });
         await user.save();
+    } else if(user && !user.isSubscribed){
+        user.isSubscribed = true;
+        await user.save();
     }
     return user;
 };
