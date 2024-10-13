@@ -56,7 +56,7 @@ const sendTokenBoostMessage = async (user, token) => {
     }
 
     let message = '';
-    const imageUrl = token.icon; // Assume this URL comes from the Dex API
+    const imageUrl = token.header? token.header: token.icon; // Assume this URL comes from the Dex API
     if (!existingToken) {
         // New token notification
         message = `   
