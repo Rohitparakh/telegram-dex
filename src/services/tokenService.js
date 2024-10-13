@@ -74,7 +74,7 @@ const sendTokenBoostMessage = async (user, token) => {
 
 🔔Call Mc: ${formatNumber(tokenDetails.marketCap)}
 💣Volume 
-🔑Liquidity 
+🔑Liquidity: ${formatNumber(tokenDetails.liquidity.usd)} 
 
 🔐Socials
 First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCString()}
