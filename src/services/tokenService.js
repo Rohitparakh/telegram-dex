@@ -56,9 +56,27 @@ const sendTokenBoostMessage = async (user, token) => {
     }
 
     let message = '';
+    const imageUrl = token.icon; // Assume this URL comes from the Dex API
     if (!existingToken) {
         // New token notification
-        message = `        
+        message = `   
+        Image
+💎New Gem Alert
+🔗Chain
+💊Platform 
+
+⏰Name
+⚔️Symbol
+
+📝Token address 
+
+🔔Call Mc
+💣Volume 
+🔑Liquidity 
+
+🔐Socials
+
+Dex url     
             *New boost found for ${tokenDetails.baseToken.name} (${tokenDetails.baseToken.symbol}):*
             Token Address: ${token.tokenAddress}
             Total Boost: ${token.totalAmount}
@@ -91,9 +109,17 @@ const sendTokenBoostMessage = async (user, token) => {
     // }
 
     // Send message to the user if there's a message to send
-    if (message) {
-        try {
-            await bot.sendMessage(user.chatId, message, { parse_mode: 'Markdown', disable_web_page_preview: true });
+    if (message) {        
+        try {            
+               // Send photo with caption using sendPhoto method
+        await bot.sendPhoto(user.chatId, imageUrl, {
+            caption: message,
+            parse_mode: 'Markdown',
+            disable_web_page_preview: true
+        });
+
+        console.log('Message with image sent successfully');
+            // await bot.sendMessage(user.chatId, message, { parse_mode: 'Markdown', disable_web_page_preview: true });
             await user.save(); // Save user updates to MongoDB
         } catch (error) {
             // Handle errors here
