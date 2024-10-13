@@ -11,13 +11,16 @@ const sendTokenBoostMessage = async (user, token) => {
     // Token is from DexScreener API that gives latest boosts, User is User collection from MongoDB
     const formattedTokenAddress = formatTokenAddress(token.tokenAddress);
     // logger(token.tokenAddress);
+    const existingToken = user.tokensReceived.find(t => t.tokenAddress === token.tokenAddress);
+    logger(`Existing token found for user: ${existingToken ? formattedTokenAddress : 'None'}`);
+    if(existingToken)return;
+
     logger(`Fetching token details from ${TOKEN_DETAILS_URL} for ${formatTokenAddress(token.tokenAddress)}`);
     const response = await axios.get(`${TOKEN_DETAILS_URL}/${token.tokenAddress}`);    
     const tokenDetails = response.data.pairs[0];
     // logger(tokenDetails.info.websites[0].url)
     // Check if the token has been received before
-    const existingToken = user.tokensReceived.find(t => t.tokenAddress === token.tokenAddress);
-    logger(`Existing token found for user: ${existingToken ? formattedTokenAddress : 'None'}`);
+    
 
     // Find the token in the database
     let tokenFromDB = await Token.findOne({ tokenAddress: token.tokenAddress });
@@ -60,30 +63,30 @@ const sendTokenBoostMessage = async (user, token) => {
     if (!existingToken) {
         // New token notification
         message = `   
-        Image
 💎New Gem Alert
-🔗Chain
-💊Platform 
+🔗Chain: ${token.chainId}
+💊Platform: ${tokenDetails.dexId} 
 
-⏰Name
-⚔️Symbol
+⏰Name: ${tokenDetails.baseToken.name} 
+⚔️Symbol: ${tokenDetails.baseToken.symbol}
 
-📝Token address 
+📝Token address: ${token.tokenAddress} 
 
-🔔Call Mc
+🔔Call Mc: ${formatNumber(tokenDetails.marketCap)}
 💣Volume 
 🔑Liquidity 
 
 🔐Socials
+First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCString()}
+Dexscreener URL: ${token.url}
 
-Dex url     
-            *New boost found for ${tokenDetails.baseToken.name} (${tokenDetails.baseToken.symbol}):*
-            Token Address: ${token.tokenAddress}
-            Total Boost: ${token.totalAmount}
-            Call MC: ${formatNumber(tokenDetails.marketCap)}
-            First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCString()}
-            Dexscreener URL: ${token.url}
         `;
+//         *New boost found for ${tokenDetails.baseToken.name} (${tokenDetails.baseToken.symbol}):*
+//             Token Address: ${token.tokenAddress}
+//             Total Boost: ${token.totalAmount}
+//             Call MC: ${formatNumber(tokenDetails.marketCap)}
+// First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCString()}    
+//         Dexscreener URL: ${token.url}
         user.tokensReceived.push({
             tokenAddress: token.tokenAddress,
             boostAmount: token.totalAmount,

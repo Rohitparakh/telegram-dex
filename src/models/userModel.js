@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
     chatId: { type: String, required: true, unique: true },
     isSubscribed: { type: Boolean, default: true },
+    isAdmin: { type: Boolean, default: false },
     tokensReceived: [{
         tokenAddress: String,
         boostAmount: Number,
