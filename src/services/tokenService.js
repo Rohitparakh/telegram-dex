@@ -75,19 +75,20 @@ const sendTokenBoostMessage = async (user, token) => {
             websites: tokenDetails.info.websites,
             socials: tokenDetails.info.socials,
         });
-    } else if (existingToken.boostAmount !== token.totalAmount) {
-        // Boost has changed, notify user
-        message = `
-            *Modified boost found for ${tokenDetails.baseToken.name} (${tokenDetails.baseToken.symbol}):*
-            Token Address: ${token.tokenAddress}
-            Call MC: ${formatNumber(tokenDetails.marketCap)}
-            Updated Boost: ${token.totalAmount}
-            Previous Boost: ${existingToken.boostAmount}
-            First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCString()}
-            Dexscreener URL: ${token.url}
-        `;
-        existingToken.boostAmount = token.totalAmount; // Update existing token's boost amount
-    }
+    } 
+    // else if (existingToken.boostAmount !== token.totalAmount) {
+    //     // Boost has changed, notify user
+    //     message = `
+    //         *Modified boost found for ${tokenDetails.baseToken.name} (${tokenDetails.baseToken.symbol}):*
+    //         Token Address: ${token.tokenAddress}
+    //         Call MC: ${formatNumber(tokenDetails.marketCap)}
+    //         Updated Boost: ${token.totalAmount}
+    //         Previous Boost: ${existingToken.boostAmount}
+    //         First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCString()}
+    //         Dexscreener URL: ${token.url}
+    //     `;
+    //     existingToken.boostAmount = token.totalAmount; // Update existing token's boost amount
+    // }
 
     // Send message to the user if there's a message to send
     if (message) {

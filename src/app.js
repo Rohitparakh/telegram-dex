@@ -34,9 +34,9 @@ connectDB();
 
 // Start the Telegram bot
 // If the bot is set up to listen for messages in telegramBot.js, this will start it.
-bot.on('polling_error', (error) => {
-    console.error(`Polling error: ${error.code} - ${error.message}`);
-});
+// bot.on('polling_error', (error) => {
+//     console.error(`Polling error: ${error.code} - ${error.message}`);
+// });
 
 
 // Function to monitor boosts over threshold
@@ -46,6 +46,7 @@ const monitorBoostsOverThreshold = async () => {
         const subscribedUsers = await User.find({ isSubscribed: true });
 
         for (const token of tokens) {
+            console.log(token.chainId)
             for (const user of subscribedUsers) {
                 await sendTokenBoostMessage(user, token);
             }
