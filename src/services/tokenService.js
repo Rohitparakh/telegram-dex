@@ -67,7 +67,7 @@ const sendTokenBoostMessage = async (user, token) => {
             🔗Chain: ${token.chainId}
             💊Platform: ${tokenDetails.dexId} 
 
-            ${tokenDetails.baseToken.name} (${tokenDetails.baseToken.symbol})
+            💰${tokenDetails.baseToken.name} (${tokenDetails.baseToken.symbol})
 
             ${user.isAdmin?`Total Boost: ${token.totalAmount}`:null}
             ${user.isAdmin?`First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCString()}`:null}
