@@ -60,23 +60,22 @@ const sendTokenBoostMessage = async (user, token) => {
 
     let message = '';
     const imageUrl = token.header? token.header: token.icon; // Assume this URL comes from the Dex API
-    if (!existingToken) {
+    if (!existingToken && tokenDetails.marketCap<=1000000) {
         // New token notification
         message = `   
             💎New Gem Alert
             🔗Chain: ${token.chainId}
             💊Platform: ${tokenDetails.dexId} 
 
-            ⏰Name: ${tokenDetails.baseToken.name} 
-            ⚔️Symbol: ${tokenDetails.baseToken.symbol}
+            ${tokenDetails.baseToken.name} (${tokenDetails.baseToken.symbol})
 
             ${user.isAdmin?`Total Boost: ${token.totalAmount}`:null}
             ${user.isAdmin?`First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCString()}`:null}
 
             📝Token address: \`${token.tokenAddress}\` 
 
-            🔔Call Mc: ${formatNumber(tokenDetails.marketCap)}
-            💣Volume 
+            💲Call Mc: ${formatNumber(tokenDetails.marketCap)}
+            📛Volume 
             🔑Liquidity: ${formatNumber(tokenDetails.liquidity.usd)} 
 
             🔐Socials
