@@ -75,7 +75,7 @@ if (hasValidUrls) {
     const type = social.type;  // Social type, e.g., "Twitter"
     const url = social.url;    // Social URL, e.g., "https://twitter.com/token"    
     // Return formatted MarkdownV2 link for each social
-    return `🔗 [${type.charAt(0).toUpperCase() + token.chainId.slice(1)}](${url.replace(/_/g, '\\_')})`;
+    return `🔗 [${type.charAt(0).toUpperCase() + type.slice(1)}](${url.replace(/_/g, '\\_')})`;
 }).join('\n');
 }
 
@@ -91,7 +91,7 @@ if (hasValidWebsiteUrls) {
     const label = website.label;  
     const url = website.url;        
     // Return formatted MarkdownV2 link for each social
-    return `🔗 [${label.charAt(0).toUpperCase() + token.chainId.slice(1)}](${url.replace(/_/g, '\\_')})`;
+    return `🔗 [${label.charAt(0).toUpperCase() + type.slice(1)}](${url.replace(/_/g, '\\_')})`;
 }).join('\n');
 }
 

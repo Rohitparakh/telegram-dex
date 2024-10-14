@@ -46,7 +46,6 @@ const monitorBoostsOverThreshold = async () => {
         const subscribedUsers = await User.find({ isSubscribed: true });
 
         for (const token of tokens) {
-            console.log(token.chainId)
             for (const user of subscribedUsers) {
                 await sendTokenBoostMessage(user, token);
             }
