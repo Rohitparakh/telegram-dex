@@ -64,7 +64,8 @@ const sendTokenBoostMessage = async (user, token) => {
         // New token notification
         message = `   
             💎New Gem Alert
-            🔗Chain: ${token.chainId}            
+            🔗Chain: ${token.chainId}
+            💊Platform: ${tokenDetails.dexId} 
 
             ⏰Name: ${tokenDetails.baseToken.name} 
             ⚔️Symbol: ${tokenDetails.baseToken.symbol}
