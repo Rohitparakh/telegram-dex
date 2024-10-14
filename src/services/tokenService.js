@@ -77,7 +77,7 @@ ${user.isAdmin?`Total Boost: ${token.totalAmount} \n First Fetched At: ${new Dat
 🔑Liquidity: ${formatNumber(tokenDetails.liquidity.usd)} 
 
 🔐Socials
-Dexscreener URL: ${token.url}
+[Dexscreener URL](${token.url})
         `;
 //         *New boost found for ${tokenDetails.baseToken.name} (${tokenDetails.baseToken.symbol}):*
 //             Token Address: ${token.tokenAddress}
