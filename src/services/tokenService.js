@@ -72,7 +72,8 @@ const sendTokenBoostMessage = async (user, token) => {
 ${user.isAdmin?`Total Boost: ${token.totalAmount} \n First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCString()}\n \n`:''}📝Token address: \`${token.tokenAddress}\`                         
 
 💲Call Mc: ${formatNumber(tokenDetails.marketCap)}
-📛Volume 
+📛Volume:
+5M: ${formatNumber(tokenDetails.volume.m5)} | 1H: ${formatNumber(tokenDetails.volume.h1)} | 6H: ${formatNumber(tokenDetails.volume.h6)} | 24H: ${formatNumber(tokenDetails.volume.h24)}
 🔑Liquidity: ${formatNumber(tokenDetails.liquidity.usd)} 
 
 🔐Socials
