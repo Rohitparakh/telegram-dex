@@ -62,6 +62,40 @@ const sendTokenBoostMessage = async (user, token) => {
     const imageUrl = token.header? token.header: token.icon; // Assume this URL comes from the Dex API
     if (!existingToken && tokenDetails.marketCap<=1000000) {
         // New token notification
+        
+const socials = tokenDetails.info.socials;
+
+// Check if there are any socials with a valid URL
+const hasValidUrls = socials.some(social => social.url);
+let socialLinks = null;
+// If no valid URLs are found, return null or handle accordingly
+if (hasValidUrls) {
+            // Loop through socials and generate the Markdown string
+     socialLinks = socials?.map(social => {
+    const type = social.type;  // Social type, e.g., "Twitter"
+    const url = social.url;    // Social URL, e.g., "https://twitter.com/token"    
+    // Return formatted MarkdownV2 link for each social
+    return `🔗 [${type}](${url.replace(/_/g, '\\_')})`;
+}).join('\n');
+}
+
+const websites = tokenDetails.info.websites;
+
+// Check if there are any socials with a valid URL
+const hasValidWebsiteUrls = websites.some(website => website.url);
+let websiteLinks = null;
+// If no valid URLs are found, return null or handle accordingly
+if (hasValidWebsiteUrls) {
+            // Loop through socials and generate the Markdown string
+            websiteLinks = websites?.map(website => {
+    const label = website.label;  
+    const url = website.url;        
+    // Return formatted MarkdownV2 link for each social
+    return `🔗 [${label}](${url.replace(/_/g, '\\_')})`;
+}).join('\n');
+}
+
+
         message = `   
 💎New Gem Alert
 🔗Chain: ${token.chainId.charAt(0).toUpperCase() + token.chainId.slice(1)}
@@ -76,8 +110,7 @@ ${user.isAdmin?`Total Boost: ${token.totalAmount} \n First Fetched At: ${new Dat
 5M: ${formatNumber(tokenDetails.volume.m5)} | 1H: ${formatNumber(tokenDetails.volume.h1)} | 6H: ${formatNumber(tokenDetails.volume.h6)} | 24H: ${formatNumber(tokenDetails.volume.h24)}
 🔑Liquidity: ${formatNumber(tokenDetails.liquidity.usd)} 
 
-🔐Socials
-[Dexscreener URL](${token.url})
+${socialLinks?`🔐Socials: \n${socialLinks}\n \n`:``}${websiteLinks?`🔐Socials: \n${websiteLinks}\n \n`:``}[Dexscreener URL](${token.url})
         `;
 //         *New boost found for ${tokenDetails.baseToken.name} (${tokenDetails.baseToken.symbol}):*
 //             Token Address: ${token.tokenAddress}
