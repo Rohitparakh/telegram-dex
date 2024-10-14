@@ -70,7 +70,7 @@ const sendTokenBoostMessage = async (user, token) => {
 ⏰Name: ${tokenDetails.baseToken.name} 
 ⚔️Symbol: ${tokenDetails.baseToken.symbol}
 
-📝Token address: ${token.tokenAddress} 
+📝Token address: \`${token.tokenAddress}\` 
 
 🔔Call Mc: ${formatNumber(tokenDetails.marketCap)}
 💣Volume 
