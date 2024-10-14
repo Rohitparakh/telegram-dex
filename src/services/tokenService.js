@@ -99,7 +99,7 @@ if (hasValidWebsiteUrls) {
         message = `   
 💎New Gem Alert
 🔗Chain: ${token.chainId.charAt(0).toUpperCase() + token.chainId.slice(1)}
-💊Platform: ${tokenDetails.dexId.charAt(0).toUpperCase() + token.chainId.slice(1)} 
+💊Platform: ${tokenDetails.dexId.charAt(0).toUpperCase() + tokenDetails.dexId.slice(1)} 
 
 💰${tokenDetails.baseToken.name} (${tokenDetails.baseToken.symbol})
 
