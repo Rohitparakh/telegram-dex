@@ -91,7 +91,7 @@ if (hasValidWebsiteUrls) {
     const label = website.label;  
     const url = website.url;        
     // Return formatted MarkdownV2 link for each social
-    return `🔗 [${label.charAt(0).toUpperCase() + type.slice(1)}](${url.replace(/_/g, '\\_')})`;
+    return `🔗 [${label.charAt(0).toUpperCase() + label.slice(1)}](${url.replace(/_/g, '\\_')})`;
 }).join('\n');
 }
 
