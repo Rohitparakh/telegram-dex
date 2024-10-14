@@ -63,20 +63,20 @@ const sendTokenBoostMessage = async (user, token) => {
     if (!existingToken && tokenDetails.marketCap<=1000000) {
         // New token notification
         message = `   
-            💎New Gem Alert
-            🔗Chain: ${token.chainId.charAt(0).toUpperCase() + token.chainId.slice(1)}
-            💊Platform: ${tokenDetails.dexId.charAt(0).toUpperCase() + token.chainId.slice(1)} 
+💎New Gem Alert
+🔗Chain: ${token.chainId.charAt(0).toUpperCase() + token.chainId.slice(1)}
+💊Platform: ${tokenDetails.dexId.charAt(0).toUpperCase() + token.chainId.slice(1)} 
 
-            💰${tokenDetails.baseToken.name} (${tokenDetails.baseToken.symbol})
+💰${tokenDetails.baseToken.name} (${tokenDetails.baseToken.symbol})
 
-            ${user.isAdmin?`Total Boost: ${token.totalAmount} \n First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCString()}\n`:''}📝Token address: \`${token.tokenAddress}\`                         
+${user.isAdmin?`Total Boost: ${token.totalAmount} \n First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCString()}\n`:''}📝Token address: \`${token.tokenAddress}\`                         
 
-            💲Call Mc: ${formatNumber(tokenDetails.marketCap)}
-            📛Volume 
-            🔑Liquidity: ${formatNumber(tokenDetails.liquidity.usd)} 
+💲Call Mc: ${formatNumber(tokenDetails.marketCap)}
+📛Volume 
+🔑Liquidity: ${formatNumber(tokenDetails.liquidity.usd)} 
 
-            🔐Socials
-            Dexscreener URL: ${token.url}
+🔐Socials
+Dexscreener URL: ${token.url}
         `;
 //         *New boost found for ${tokenDetails.baseToken.name} (${tokenDetails.baseToken.symbol}):*
 //             Token Address: ${token.tokenAddress}
