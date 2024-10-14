@@ -110,7 +110,7 @@ ${user.isAdmin?`Total Boost: ${token.totalAmount} \n First Fetched At: ${new Dat
 5M: ${formatNumber(tokenDetails.volume.m5)} | 1H: ${formatNumber(tokenDetails.volume.h1)} | 6H: ${formatNumber(tokenDetails.volume.h6)} | 24H: ${formatNumber(tokenDetails.volume.h24)}
 🔑Liquidity: ${formatNumber(tokenDetails.liquidity.usd)} 
 
-${socialLinks?`Links: \n${socialLinks}\n`:``}${websiteLinks?`${websiteLinks}\n \n`:``}🔗 Dexscreener URL: ${token.url}
+${socialLinks?`Links: \n${socialLinks}\n`:``}${websiteLinks?`${websiteLinks}\n \n`:``}💫 Dexscreener URL: ${token.url}
         `;
 //         *New boost found for ${tokenDetails.baseToken.name} (${tokenDetails.baseToken.symbol}):*
 //             Token Address: ${token.tokenAddress}
