@@ -63,23 +63,24 @@ const sendTokenBoostMessage = async (user, token) => {
     if (!existingToken) {
         // New token notification
         message = `   
-💎New Gem Alert
-🔗Chain: ${token.chainId}
-💊Platform: ${tokenDetails.dexId} 
+            💎New Gem Alert
+            🔗Chain: ${token.chainId}
+            💊Platform: ${tokenDetails.dexId} 
 
-⏰Name: ${tokenDetails.baseToken.name} 
-⚔️Symbol: ${tokenDetails.baseToken.symbol}
+            ⏰Name: ${tokenDetails.baseToken.name} 
+            ⚔️Symbol: ${tokenDetails.baseToken.symbol}
 
-📝Token address: \`${token.tokenAddress}\` 
+            ${user.isAdmin?`Total Boost: ${token.totalAmount}`:null}
+            ${user.isAdmin?`First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCString()}`:null}
 
-🔔Call Mc: ${formatNumber(tokenDetails.marketCap)}
-💣Volume 
-🔑Liquidity: ${formatNumber(tokenDetails.liquidity.usd)} 
+            📝Token address: \`${token.tokenAddress}\` 
 
-🔐Socials
-First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCString()}
-Dexscreener URL: ${token.url}
+            🔔Call Mc: ${formatNumber(tokenDetails.marketCap)}
+            💣Volume 
+            🔑Liquidity: ${formatNumber(tokenDetails.liquidity.usd)} 
 
+            🔐Socials
+            Dexscreener URL: ${token.url}
         `;
 //         *New boost found for ${tokenDetails.baseToken.name} (${tokenDetails.baseToken.symbol}):*
 //             Token Address: ${token.tokenAddress}
