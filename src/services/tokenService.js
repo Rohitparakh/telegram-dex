@@ -145,15 +145,16 @@ ${socialLinks?`Links: \n${socialLinks}\n`:``}${websiteLinks?`${websiteLinks}\n \
     // Send message to the user if there's a message to send
     if (message) {        
         try {            
-               // Send photo with caption using sendPhoto method
-        await bot.sendPhoto(user.chatId, imageUrl, {
-            caption: message,
-            parse_mode: 'Markdown',
-            disable_web_page_preview: true
-        });
+            // Send photo with caption using sendPhoto method
+            await bot.sendPhoto(user.chatId, imageUrl, {
+                caption: message,
+                parse_mode: 'Markdown',
+                disable_web_page_preview: true
+            });
 
-        console.log('Message with image sent successfully');
-            // await bot.sendMessage(user.chatId, message, { parse_mode: 'Markdown', disable_web_page_preview: true });
+            logger('Message with image sent successfully');
+            await bot.sendMessage(user.chatId, `${token.tokenAddress}`, { parse_mode: 'Markdown', disable_web_page_preview: true });    
+            logger('Token Address sent successfully');
             await user.save(); // Save user updates to MongoDB
         } catch (error) {
             // Handle errors here
