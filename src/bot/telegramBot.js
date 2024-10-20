@@ -19,7 +19,7 @@ bot.onText(/\/start/, async (msg) => {
 bot.onText(/\/stop/, async (msg) => {
     const chatId = msg.chat.id;
     await unsubscribeUser(chatId);
-    bot.sendMessage(chatId, 'You have unsubscribed from token boost notifications.');
+    bot.sendMessage(chatId, 'You have unsubscribed from token notifications.');
 });
 
 // Test command
