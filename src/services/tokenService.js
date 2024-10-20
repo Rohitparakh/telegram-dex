@@ -156,7 +156,7 @@ ${socialLinks?`Links: \n${socialLinks}\n`:``}${websiteLinks?`${websiteLinks}\n \
             });
 
             logger('Message with image sent successfully');
-            await bot.sendMessage(user.chatId, `${token.tokenAddress}`, { parse_mode: 'Markdown', disable_web_page_preview: true });    
+            // await bot.sendMessage(user.chatId, `${token.tokenAddress}`, { parse_mode: 'Markdown', disable_web_page_preview: true });    
             logger('Token Address sent successfully');
             await user.save(); // Save user updates to MongoDB
         } catch (error) {
