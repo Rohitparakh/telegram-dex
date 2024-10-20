@@ -11,7 +11,7 @@ bot.onText(/\/start/, async (msg) => {
     // const username = msg.from.username; // Retrieve the username
     const firstName = msg.from.first_name; // You can also get the first name
     const user = await subscribeUser(chatId);
-    bot.sendMessage(chatId, `Hey ${firstName}, you will now receive token boost notifications!`);
+    bot.sendMessage(chatId, `Hey ${firstName}, you will now receive token notifications!`);
     logger(`User ${chatId} subscribed.`);
 });
 
