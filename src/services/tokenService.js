@@ -108,10 +108,10 @@ ${user.isAdmin?`Total Boost: ${token.totalAmount} \n First Fetched At: ${new Dat
 💲Call Mc: ${formatNumber(tokenDetails.marketCap)}
 📛Volume:
 5M: ${formatNumber(tokenDetails.volume.m5)} | 1H: ${formatNumber(tokenDetails.volume.h1)} | 6H: ${formatNumber(tokenDetails.volume.h6)} | 24H: ${formatNumber(tokenDetails.volume.h24)}
+🔑Liquidity: ${formatNumber(tokenDetails.liquidity.usd)} 
 
 Price Change:
 5M: ${tokenDetails.priceChange.m5}% | 1H: ${tokenDetails.priceChange.h1}% | 6H: ${tokenDetails.priceChange.h6}% | 24H: ${tokenDetails.priceChange.h24}%
-🔑Liquidity: ${formatNumber(tokenDetails.liquidity.usd)} 
 
 ${socialLinks?`Links: \n${socialLinks}\n`:``}${websiteLinks?`${websiteLinks}\n \n`:``}💫 Dexscreener URL: ${token.url}
         `;
