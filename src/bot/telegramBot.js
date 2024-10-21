@@ -3,7 +3,7 @@ const { subscribeUser, unsubscribeUser } = require('../services/userService');
 const { logger } = require('../utils/logger');
 require('dotenv').config();
 
-const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: true });
+const bot = new TelegramBot(process.env.NODE_ENV==="development"?process.env.TELEGRAM_BOT_TOKEN_DEVELOPMENT:process.env.TELEGRAM_BOT_TOKEN, { polling: true });
 
 // Start command
 bot.onText(/\/start/, async (msg) => {
