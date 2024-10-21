@@ -12,6 +12,11 @@ const BOOST_THRESHOLD_SUI = 100;
 const BOOST_CHAIN_ID_SOLANA = 'solana';
 const BOOST_CHAIN_ID_SUI = 'sui';
 
+// Boolean variables to control filtering for Solana and Sui tokens
+const includeSolanaTokens = true; // Set to true if you want to include Solana tokens
+const includeSuiTokens = false;   // Set to true if you want to include Sui tokens
+
+
 // Fetch tokens with boosts over the defined threshold for Solana and Sui
 const getTokensWithBoostsOverThreshold = async () => {
     try {
@@ -21,15 +26,21 @@ const getTokensWithBoostsOverThreshold = async () => {
         if (response.status === 200) {
             const tokens = response.data;
 
+            let filteredSolanaTokens = [];
             // Filter tokens based on chain and threshold for Solana
-            const filteredSolanaTokens = tokens.filter(token =>
-                token.totalAmount >= BOOST_THRESHOLD_SOLANA && token.chainId === BOOST_CHAIN_ID_SOLANA
-            );
+            if(includeSolanaTokens){
+                filteredSolanaTokens = tokens.filter(token =>
+                    token.totalAmount >= BOOST_THRESHOLD_SOLANA && token.chainId === BOOST_CHAIN_ID_SOLANA
+                );
+            }
 
+            let filteredSuiTokens = []
             // Filter tokens based on chain and threshold for Sui
-            const filteredSuiTokens = tokens.filter(token =>
-                token.totalAmount >= BOOST_THRESHOLD_SUI && token.chainId === BOOST_CHAIN_ID_SUI
-            );
+            if(includeSuiTokens){    
+                filteredSuiTokens = tokens.filter(token =>
+                    token.totalAmount >= BOOST_THRESHOLD_SUI && token.chainId === BOOST_CHAIN_ID_SUI
+                );
+            }
 
             logger(`${filteredSolanaTokens.length} Solana tokens found over the threshold.`);
             logger(`${filteredSuiTokens.length} Sui tokens found over the threshold.`);
