@@ -7,7 +7,7 @@ module.exports = {
         exec_mode: 'cluster', // Run in cluster mode
         env: {
             NODE_ENV: 'development', // Environment variable for development
-            TELEGRAM_BOT_TOKEN: '7813201051:AAEJde1-67FyAbfWk4K_g4dps6rzATXALWM',
+            TELEGRAM_BOT_TOKEN: '7807603138:AAGZEJNavzfSBJxrcUcM3J-_Yb0AGTRNT08',
             MONGO_URI: 'mongodb+srv://rohitparakh4:Rohit%40612.@cluster0.mb8ck.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
             PORT: 3000
 
