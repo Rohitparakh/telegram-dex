@@ -21,6 +21,7 @@ const includeSuiTokens = false;   // Set to true if you want to include Sui toke
 const getTokensWithBoostsOverThreshold = async () => {
     try {
         logger(`Fetching token boosts from ${BOOSTS_URL}...`);
+        logger(`PROCESS ENV: ${process.env.NODE_ENV}`);
         const response = await axios.get(BOOSTS_URL);
 
         if (response.status === 200) {
