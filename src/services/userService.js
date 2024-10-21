@@ -1,10 +1,10 @@
 const User = require('../models/userModel');
 
 // Subscribe user
-const subscribeUser = async (chatId) => {
+const subscribeUser = async (chatId,username) => {
     let user = await User.findOne({ chatId });
     if (!user) {
-        user = new User({ chatId });
+        user = new User({ chatId, username });
         await user.save();
     } else if(user && !user.isSubscribed){
         user.isSubscribed = true;

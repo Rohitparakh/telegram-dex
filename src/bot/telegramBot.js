@@ -8,9 +8,9 @@ const bot = new TelegramBot(process.env.NODE_ENV==="development"?process.env.TEL
 // Start command
 bot.onText(/\/start/, async (msg) => {
     const chatId = msg.chat.id;
-    // const username = msg.from.username; // Retrieve the username
+    const username = msg.from.username; // Retrieve the username
     const firstName = msg.from.first_name; // You can also get the first name
-    const user = await subscribeUser(chatId);
+    const user = await subscribeUser(chatId,username);
     bot.sendMessage(chatId, `Hey ${firstName}, you will now receive token notifications!`);
     logger(`User ${chatId} subscribed.`);
 });
