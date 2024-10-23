@@ -417,36 +417,36 @@ const sendNewTokenMessage = async (user, token) => {
     if (!existingToken) {
         // New token notification
         
-const socials = token?.info?.socials || null;
+// const socials = token?.info?.socials || null;
 
-// Check if there are any socials with a valid URL
-const hasValidUrls = socials?.some(social => social.url);
-let socialLinks = null;
-// If no valid URLs are found, return null or handle accordingly
-if (hasValidUrls) {
-            // Loop through socials and generate the Markdown string
-     socialLinks = socials?.map(social => {
-    const type = social.type;  // Social type, e.g., "Twitter"
-    const url = social.url;    // Social URL, e.g., "https://twitter.com/token"    
-    // Return formatted MarkdownV2 link for each social
-    return `🔗 [${type.charAt(0).toUpperCase() + type.slice(1)}](${url.replace(/_/g, '\\_')})`;
-}).join('\n');
-}
+// // Check if there are any socials with a valid URL
+// const hasValidUrls = socials?.some(social => social.url);
+// let socialLinks = null;
+// // If no valid URLs are found, return null or handle accordingly
+// if (hasValidUrls) {
+//             // Loop through socials and generate the Markdown string
+//      socialLinks = socials?.map(social => {
+//     const type = social.type;  // Social type, e.g., "Twitter"
+//     const url = social.url;    // Social URL, e.g., "https://twitter.com/token"    
+//     // Return formatted MarkdownV2 link for each social
+//     return `🔗 [${type.charAt(0).toUpperCase() + type.slice(1)}](${url.replace(/_/g, '\\_')})`;
+// }).join('\n');
+// }
 
-const websites = token?.info?.websites || null;
+// const websites = token?.info?.websites || null;
 
-// Check if there are any socials with a valid URL
-const hasValidWebsiteUrls = websites?.some(website => website.url);
-let websiteLinks = null;
-// If no valid URLs are found, return null or handle accordingly
-if (hasValidWebsiteUrls) {
-            // Loop through socials and generate the Markdown string
-            websiteLinks = websites?.map(website => {
-    const label = website.label;  
-    const url = website.url;        
-    // Return formatted MarkdownV2 link for each social
-    return `🔗 [${label.charAt(0).toUpperCase() + label.slice(1)}](${url.replace(/_/g, '\\_')})`;
-}).join('\n');
+// // Check if there are any socials with a valid URL
+// const hasValidWebsiteUrls = websites?.some(website => website.url);
+// let websiteLinks = null;
+// // If no valid URLs are found, return null or handle accordingly
+// if (hasValidWebsiteUrls) {
+//             // Loop through socials and generate the Markdown string
+//             websiteLinks = websites?.map(website => {
+//     const label = website.label;  
+//     const url = website.url;        
+//     // Return formatted MarkdownV2 link for each social
+//     return `🔗 [${label.charAt(0).toUpperCase() + label.slice(1)}](${url.replace(/_/g, '\\_')})`;
+// }).join('\n');
 }
 
 
@@ -467,7 +467,7 @@ ${user.isAdmin?`First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCSt
 Price Change:
 5M: ${token.priceChange.m5}% | 1H: ${token.priceChange.h1}% | 6H: ${token.priceChange.h6}% | 24H: ${token.priceChange.h24}%
 
-${socialLinks?`Links: \n${socialLinks}\n`:``}${websiteLinks?`${websiteLinks}\n \n`:``}💫 Dexscreener URL: ${token.url}
+💫 Dexscreener URL: ${token.url}
         `;
 //         *New boost found for ${token.baseToken.name} (${token.baseToken.symbol}):*
 //             Token Address: ${token.tokenAddress}
