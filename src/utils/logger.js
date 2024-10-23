@@ -14,7 +14,7 @@ function formatNumber(num) {
     } else if (num >= 1e3) {
         return (num / 1e3).toFixed(1) + 'K'; // Thousands
     } else {
-        return num.toString(); // Less than 1000
+        return num.toFixed(2).toString(); // Less than 1000
     }
 }
 
