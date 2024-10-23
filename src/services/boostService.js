@@ -18,7 +18,7 @@ const BOOST_CHAIN_ID_SUI = 'sui';
 // Boolean variables to control filtering for Solana and Sui tokens
 const includeSolanaTokens = true; // Set to true if you want to include Solana tokens
 const includeSuiTokens = false;   // Set to true if you want to include Sui tokens
-const includeNewTokens = false;   // Set to true if you want to include new solana tokens
+const includeNewTokens = true;   // Set to true if you want to include new solana tokens
 
 
 // Fetch tokens with boosts over the defined threshold for Solana and Sui
