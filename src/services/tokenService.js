@@ -354,7 +354,9 @@ ${socialLinks?`Links: \n${socialLinks}\n`:``}${websiteLinks?`${websiteLinks}\n \
 // };
 const sendNewTokenMessage = async (user, token) => {
     logger("Starting new token message send");
-
+    console.log(user.username);
+    return;
+    
     // Token is from DexScreener API that gives latest token launches, User is User collection from MongoDB
     const formattedTokenAddress = formatTokenAddress(token.baseToken.address);
 
