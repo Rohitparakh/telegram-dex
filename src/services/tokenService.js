@@ -382,8 +382,8 @@ const sendNewTokenMessage = async (user, token) => {
             tokenFromDB.name = token.baseToken.name;
             tokenFromDB.symbol = token.baseToken.symbol;
             tokenFromDB.marketCap = token.marketCap;
-            tokenFromDB.websites = token.info.websites;
-            tokenFromDB.socials = token.info.socials;
+            // tokenFromDB.websites = token.info.websites;
+            // tokenFromDB.socials = token.info.socials;
             tokenFromDB.firstFetchedAt = tokenFromDB.firstFetchedAt || Date.now(); // Only set if not already set
             
             await tokenFromDB.save();
@@ -397,8 +397,8 @@ const sendNewTokenMessage = async (user, token) => {
                 name: token.baseToken.name,
                 symbol: token.baseToken.symbol,
                 marketCap: token.marketCap,
-                websites: token.info.websites,
-                socials: token.info.socials,
+                // websites: token.info.websites,
+                // socials: token.info.socials,
             });
             await newToken.save();
             tokenFromDB = newToken; // Use the new token for further operations
