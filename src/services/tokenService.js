@@ -417,7 +417,7 @@ const sendNewTokenMessage = async (user, token) => {
     if (!existingToken) {
         // New token notification
         
-const socials = tokenDetails.info.socials || null;
+const socials = token.info.socials || null;
 
 // Check if there are any socials with a valid URL
 const hasValidUrls = socials?.some(social => social.url);
@@ -433,7 +433,7 @@ if (hasValidUrls) {
 }).join('\n');
 }
 
-const websites = tokenDetails.info.websites || null;
+const websites = token.info.websites || null;
 
 // Check if there are any socials with a valid URL
 const hasValidWebsiteUrls = websites?.some(website => website.url);
@@ -453,7 +453,7 @@ if (hasValidWebsiteUrls) {
         message = `   
 💎Newly Launched Gem Alert
 🔗Chain: ${token.chainId.charAt(0).toUpperCase() + token.chainId.slice(1)}
-💊Platform: ${token.dexId.charAt(0).toUpperCase() + tokenDetails.dexId.slice(1)} 
+💊Platform: ${token.dexId.charAt(0).toUpperCase() + token.dexId.slice(1)} 
 
 💰${token.baseToken.name} (${token.baseToken.symbol})
 
@@ -469,10 +469,10 @@ Price Change:
 
 ${socialLinks?`Links: \n${socialLinks}\n`:``}${websiteLinks?`${websiteLinks}\n \n`:``}💫 Dexscreener URL: ${token.url}
         `;
-//         *New boost found for ${tokenDetails.baseToken.name} (${tokenDetails.baseToken.symbol}):*
+//         *New boost found for ${token.baseToken.name} (${token.baseToken.symbol}):*
 //             Token Address: ${token.tokenAddress}
 //             Total Boost: ${token.totalAmount}
-//             Call MC: ${formatNumber(tokenDetails.marketCap)}
+//             Call MC: ${formatNumber(token.marketCap)}
 // First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCString()}    
 //         Dexscreener URL: ${token.url}
         user.tokensReceived.push({
@@ -487,9 +487,9 @@ ${socialLinks?`Links: \n${socialLinks}\n`:``}${websiteLinks?`${websiteLinks}\n \
     // else if (existingToken.boostAmount !== token.totalAmount) {
     //     // Boost has changed, notify user
     //     message = `
-    //         *Modified boost found for ${tokenDetails.baseToken.name} (${tokenDetails.baseToken.symbol}):*
+    //         *Modified boost found for ${token.baseToken.name} (${token.baseToken.symbol}):*
     //         Token Address: ${token.tokenAddress}
-    //         Call MC: ${formatNumber(tokenDetails.marketCap)}
+    //         Call MC: ${formatNumber(token.marketCap)}
     //         Updated Boost: ${token.totalAmount}
     //         Previous Boost: ${existingToken.boostAmount}
     //         First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCString()}
