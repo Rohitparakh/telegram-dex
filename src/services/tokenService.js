@@ -447,7 +447,7 @@ const sendNewTokenMessage = async (user, token) => {
 //     // Return formatted MarkdownV2 link for each social
 //     return `🔗 [${label.charAt(0).toUpperCase() + label.slice(1)}](${url.replace(/_/g, '\\_')})`;
 // }).join('\n');
-}
+// }
 
 
         message = `   
