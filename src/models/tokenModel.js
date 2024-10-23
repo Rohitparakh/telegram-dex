@@ -17,7 +17,7 @@ const tokenSchema = new mongoose.Schema({
         }
     ],
     tokenAddress: { type: String, required: true, unique: true }, // Unique token address
-    boostAmount: { type: Number, required: true },              // Amount of boosts
+    boostAmount: { type: Number },              // Amount of boosts
     firstFetchedAt: { type: Date, default: Date.now },          // Date when the token was first fetched
     boosts: { type: Number }                         // Default boosts count
 });
