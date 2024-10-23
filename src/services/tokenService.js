@@ -266,7 +266,7 @@ if (hasValidWebsiteUrls) {
 
 
         message = `   
-💎New Launched Gem Alert
+💎Newly Launched Gem Alert
 🔗Chain: ${token.chainId.charAt(0).toUpperCase() + token.chainId.slice(1)}
 💊Platform: ${token.dexId.charAt(0).toUpperCase() + tokenDetails.dexId.slice(1)} 
 
