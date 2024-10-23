@@ -12,10 +12,10 @@ const sendTokenBoostMessage = async (user, token) => {
     const formattedTokenAddress = formatTokenAddress(token.tokenAddress);
     // logger(token.tokenAddress);
     const existingToken = user.tokensReceived.find(t => t.tokenAddress === token.tokenAddress);
-    logger(`Existing token found for ${user.username?user.username:'user'}: ${existingToken ? formattedTokenAddress : 'None'}`);
+    // logger(`Existing token found for ${user.username?user.username:'user'}: ${existingToken ? formattedTokenAddress : 'None'}`);
     if(existingToken)return;
 
-    logger(`Fetching token details from ${TOKEN_DETAILS_URL} for ${formatTokenAddress(token.tokenAddress)}`);
+    // logger(`Fetching token details from ${TOKEN_DETAILS_URL} for ${formatTokenAddress(token.tokenAddress)}`);
     const response = await axios.get(`${TOKEN_DETAILS_URL}/${token.tokenAddress}`);    
     const tokenDetails = response.data.pairs[0];
     // logger(tokenDetails.info.websites[0].url)
@@ -186,11 +186,12 @@ ${socialLinks?`Links: \n${socialLinks}\n`:``}${websiteLinks?`${websiteLinks}\n \
 
 // Send notification if new or modified token
 const sendNewTokenMessage = async (user, token) => {
+    logger("Starting new token message send")
     // Token is from DexScreener API that gives latest token launches, User is User collection from MongoDB
     const formattedTokenAddress = formatTokenAddress(token.baseToken.tokenAddress);
 
     const existingToken = user.tokensReceived.find(t => t.tokenAddress === token.baseToken.tokenAddress);
-    logger(`Existing token found for ${user.username?user.username:'user'}: ${existingToken ? formattedTokenAddress : 'None'}`);
+    // logger(`Existing token found for ${user.username?user.username:'user'}: ${existingToken ? formattedTokenAddress : 'None'}`);
     if(existingToken)return;    
 
     // Find the token in the database
