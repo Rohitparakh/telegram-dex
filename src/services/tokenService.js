@@ -354,9 +354,6 @@ ${socialLinks?`Links: \n${socialLinks}\n`:``}${websiteLinks?`${websiteLinks}\n \
 // };
 const sendNewTokenMessage = async (user, token) => {
     logger("Starting new token message send");
-    console.log(user.username);
-    console.log(token.marketCap);
-    return;
     
     // Token is from DexScreener API that gives latest token launches, User is User collection from MongoDB
     const formattedTokenAddress = formatTokenAddress(token.baseToken.address);
@@ -464,7 +461,7 @@ ${user.isAdmin?`First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCSt
 
 💲Call Mc: ${formatNumber(token.marketCap)}
 📛Volume:
-5M: ${formatNumber(token.volume.m5)} | 1H: ${formatNumber(token.volume.h1)} | 6H: ${formatNumber(token.volume.h6)} | 24H: ${formatNumber(token.volume.h24)}
+5M: ${formatNumber(token.volume.m5.total)} | 1H: ${formatNumber(token.volume.h1.total)} | 6H: ${formatNumber(token.volume.h6.total)} | 24H: ${formatNumber(token.volume.h24.total)}
 
 Price Change:
 5M: ${token.priceChange.m5}% | 1H: ${token.priceChange.h1}% | 6H: ${token.priceChange.h6}% | 24H: ${token.priceChange.h24}%
