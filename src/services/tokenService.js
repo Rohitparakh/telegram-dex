@@ -188,14 +188,14 @@ ${socialLinks?`Links: \n${socialLinks}\n`:``}${websiteLinks?`${websiteLinks}\n \
 const sendNewTokenMessage = async (user, token) => {
     logger("Starting new token message send")
     // Token is from DexScreener API that gives latest token launches, User is User collection from MongoDB
-    const formattedTokenAddress = formatTokenAddress(token.baseToken.tokenAddress);
+    const formattedTokenAddress = formatTokenAddress(token.baseToken.address);
 
-    const existingToken = user.tokensReceived.find(t => t.tokenAddress === token.baseToken.tokenAddress);
+    const existingToken = user.tokensReceived.find(t => t.tokenAddress === token.baseToken.address);
     // logger(`Existing token found for ${user.username?user.username:'user'}: ${existingToken ? formattedTokenAddress : 'None'}`);
     if(existingToken)return;    
 
     // Find the token in the database
-    let tokenFromDB = await Token.findOne({ tokenAddress: token.baseToken.tokenAddress });
+    let tokenFromDB = await Token.findOne({ tokenAddress: token.baseToken.address });
     // let firstFetchedAt = tokenFromDB ? tokenFromDB.firstFetchedAt : null;
 
     // Log token to MongoDB first
@@ -212,7 +212,7 @@ const sendNewTokenMessage = async (user, token) => {
         } else {
             // Create a new token entry with firstFetchedAt
             const newToken = new Token({
-                tokenAddress: token.baseToken.tokenAddress,                
+                tokenAddress: token.baseToken.address,                
                 firstFetchedAt: new Date(), // Log the first fetched time
                 name: token.baseToken.name,
                 symbol: token.baseToken.symbol,
@@ -273,7 +273,7 @@ if (hasValidWebsiteUrls) {
 
 💰${token.baseToken.name} (${token.baseToken.symbol})
 
-${user.isAdmin?`First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCString()}\n \n`:''}📝Token address: \`${token.baseToken.tokenAddress}\`                         
+${user.isAdmin?`First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCString()}\n \n`:''}📝Token address: \`${token.baseToken.address}\`                         
 
 💲Call Mc: ${formatNumber(token.marketCap)}
 📛Volume:
@@ -292,7 +292,7 @@ ${socialLinks?`Links: \n${socialLinks}\n`:``}${websiteLinks?`${websiteLinks}\n \
 // First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCString()}    
 //         Dexscreener URL: ${token.url}
         user.tokensReceived.push({
-            tokenAddress: token.baseToken.tokenAddress,
+            tokenAddress: token.baseToken.address,
             name: token.baseToken.name,
             symbol: token.baseToken.symbol,
             marketCap: token.marketCap,
