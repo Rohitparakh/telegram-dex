@@ -417,7 +417,7 @@ const sendNewTokenMessage = async (user, token) => {
     if (!existingToken) {
         // New token notification
         
-const socials = token.info.socials || null;
+const socials = token?.info?.socials || null;
 
 // Check if there are any socials with a valid URL
 const hasValidUrls = socials?.some(social => social.url);
@@ -433,7 +433,7 @@ if (hasValidUrls) {
 }).join('\n');
 }
 
-const websites = token.info.websites || null;
+const websites = token?.info?.websites || null;
 
 // Check if there are any socials with a valid URL
 const hasValidWebsiteUrls = websites?.some(website => website.url);
