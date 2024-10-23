@@ -230,109 +230,109 @@ ${socialLinks?`Links: \n${socialLinks}\n`:``}${websiteLinks?`${websiteLinks}\n \
 
 //     let message = '';
 //     const imageUrl = token.profile.banner? token.profile.banner: token.profile.icon; // Assume this URL comes from the Dex API
-//     if (!existingToken) {
-//         // New token notification
+    if (!existingToken) {
+        // New token notification
         
-// const socials = tokenDetails.info.socials;
+const socials = tokenDetails.info.socials;
 
-// // Check if there are any socials with a valid URL
-// const hasValidUrls = socials.some(social => social.url);
-// let socialLinks = null;
-// // If no valid URLs are found, return null or handle accordingly
-// if (hasValidUrls) {
-//             // Loop through socials and generate the Markdown string
-//      socialLinks = socials?.map(social => {
-//     const type = social.type;  // Social type, e.g., "Twitter"
-//     const url = social.url;    // Social URL, e.g., "https://twitter.com/token"    
-//     // Return formatted MarkdownV2 link for each social
-//     return `🔗 [${type.charAt(0).toUpperCase() + type.slice(1)}](${url.replace(/_/g, '\\_')})`;
-// }).join('\n');
-// }
+// Check if there are any socials with a valid URL
+const hasValidUrls = socials.some(social => social.url);
+let socialLinks = null;
+// If no valid URLs are found, return null or handle accordingly
+if (hasValidUrls) {
+            // Loop through socials and generate the Markdown string
+     socialLinks = socials?.map(social => {
+    const type = social.type;  // Social type, e.g., "Twitter"
+    const url = social.url;    // Social URL, e.g., "https://twitter.com/token"    
+    // Return formatted MarkdownV2 link for each social
+    return `🔗 [${type.charAt(0).toUpperCase() + type.slice(1)}](${url.replace(/_/g, '\\_')})`;
+}).join('\n');
+}
 
-// const websites = tokenDetails.info.websites;
+const websites = tokenDetails.info.websites;
 
-// // Check if there are any socials with a valid URL
-// const hasValidWebsiteUrls = websites.some(website => website.url);
-// let websiteLinks = null;
-// // If no valid URLs are found, return null or handle accordingly
-// if (hasValidWebsiteUrls) {
-//             // Loop through socials and generate the Markdown string
-//             websiteLinks = websites?.map(website => {
-//     const label = website.label;  
-//     const url = website.url;        
-//     // Return formatted MarkdownV2 link for each social
-//     return `🔗 [${label.charAt(0).toUpperCase() + label.slice(1)}](${url.replace(/_/g, '\\_')})`;
-// }).join('\n');
-// }
+// Check if there are any socials with a valid URL
+const hasValidWebsiteUrls = websites.some(website => website.url);
+let websiteLinks = null;
+// If no valid URLs are found, return null or handle accordingly
+if (hasValidWebsiteUrls) {
+            // Loop through socials and generate the Markdown string
+            websiteLinks = websites?.map(website => {
+    const label = website.label;  
+    const url = website.url;        
+    // Return formatted MarkdownV2 link for each social
+    return `🔗 [${label.charAt(0).toUpperCase() + label.slice(1)}](${url.replace(/_/g, '\\_')})`;
+}).join('\n');
+}
 
 
-//         message = `   
-// 💎Newly Launched Gem Alert
-// 🔗Chain: ${token.chainId.charAt(0).toUpperCase() + token.chainId.slice(1)}
-// 💊Platform: ${token.dexId.charAt(0).toUpperCase() + tokenDetails.dexId.slice(1)} 
+        message = `   
+💎Newly Launched Gem Alert
+🔗Chain: ${token.chainId.charAt(0).toUpperCase() + token.chainId.slice(1)}
+💊Platform: ${token.dexId.charAt(0).toUpperCase() + tokenDetails.dexId.slice(1)} 
 
-// 💰${token.baseToken.name} (${token.baseToken.symbol})
+💰${token.baseToken.name} (${token.baseToken.symbol})
 
-// ${user.isAdmin?`First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCString()}\n \n`:''}📝Token address: \`${token.baseToken.address}\`                         
+${user.isAdmin?`First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCString()}\n \n`:''}📝Token address: \`${token.baseToken.address}\`                         
 
-// 💲Call Mc: ${formatNumber(token.marketCap)}
-// 📛Volume:
-// 5M: ${formatNumber(token.volume.m5)} | 1H: ${formatNumber(token.volume.h1)} | 6H: ${formatNumber(token.volume.h6)} | 24H: ${formatNumber(token.volume.h24)}
-// 🔑Liquidity: ${formatNumber(token.liquidity.usd)} 
+💲Call Mc: ${formatNumber(token.marketCap)}
+📛Volume:
+5M: ${formatNumber(token.volume.m5)} | 1H: ${formatNumber(token.volume.h1)} | 6H: ${formatNumber(token.volume.h6)} | 24H: ${formatNumber(token.volume.h24)}
+🔑Liquidity: ${formatNumber(token.liquidity.usd)} 
 
-// Price Change:
-// 5M: ${token.priceChange.m5}% | 1H: ${token.priceChange.h1}% | 6H: ${token.priceChange.h6}% | 24H: ${token.priceChange.h24}%
+Price Change:
+5M: ${token.priceChange.m5}% | 1H: ${token.priceChange.h1}% | 6H: ${token.priceChange.h6}% | 24H: ${token.priceChange.h24}%
 
-// ${socialLinks?`Links: \n${socialLinks}\n`:``}${websiteLinks?`${websiteLinks}\n \n`:``}💫 Dexscreener URL: ${token.url}
-//         `;
-// //         *New boost found for ${tokenDetails.baseToken.name} (${tokenDetails.baseToken.symbol}):*
-// //             Token Address: ${token.tokenAddress}
-// //             Total Boost: ${token.totalAmount}
-// //             Call MC: ${formatNumber(tokenDetails.marketCap)}
-// // First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCString()}    
-// //         Dexscreener URL: ${token.url}
-//         user.tokensReceived.push({
-//             tokenAddress: token.baseToken.address,
-//             name: token.baseToken.name,
-//             symbol: token.baseToken.symbol,
-//             marketCap: token.marketCap,
-//             websites: token.info.websites,
-//             socials: token.info.socials,
+${socialLinks?`Links: \n${socialLinks}\n`:``}${websiteLinks?`${websiteLinks}\n \n`:``}💫 Dexscreener URL: ${token.url}
+        `;
+//         *New boost found for ${tokenDetails.baseToken.name} (${tokenDetails.baseToken.symbol}):*
+//             Token Address: ${token.tokenAddress}
+//             Total Boost: ${token.totalAmount}
+//             Call MC: ${formatNumber(tokenDetails.marketCap)}
+// First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCString()}    
+//         Dexscreener URL: ${token.url}
+        user.tokensReceived.push({
+            tokenAddress: token.baseToken.address,
+            name: token.baseToken.name,
+            symbol: token.baseToken.symbol,
+            marketCap: token.marketCap,
+            websites: token.info.websites,
+            socials: token.info.socials,
+        });
+    } 
+    // else if (existingToken.boostAmount !== token.totalAmount) {
+    //     // Boost has changed, notify user
+    //     message = `
+    //         *Modified boost found for ${tokenDetails.baseToken.name} (${tokenDetails.baseToken.symbol}):*
+    //         Token Address: ${token.tokenAddress}
+    //         Call MC: ${formatNumber(tokenDetails.marketCap)}
+    //         Updated Boost: ${token.totalAmount}
+    //         Previous Boost: ${existingToken.boostAmount}
+    //         First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCString()}
+    //         Dexscreener URL: ${token.url}
+    //     `;
+    //     existingToken.boostAmount = token.totalAmount; // Update existing token's boost amount
+    // }
+
+//     // Send message to the user if there's a message to send
+//     if(process.env.NODE_ENV === "development"){
+//         // Chat ID of MaestroSniperBot
+// const chatId = '@MaestroSniperBot';
+
+// // Function to send a message
+// const sendMessage = (tokenAddress) => {
+//     bot.sendMessage(chatId, `Token: ${tokenAddress}`)
+//         .then(() => {
+//             console.log('Message sent successfully to Maestro.');
+//         })
+//         .catch((error) => {
+//             console.error('Failed to send message to Maestro:', error);
 //         });
-//     } 
-//     // else if (existingToken.boostAmount !== token.totalAmount) {
-//     //     // Boost has changed, notify user
-//     //     message = `
-//     //         *Modified boost found for ${tokenDetails.baseToken.name} (${tokenDetails.baseToken.symbol}):*
-//     //         Token Address: ${token.tokenAddress}
-//     //         Call MC: ${formatNumber(tokenDetails.marketCap)}
-//     //         Updated Boost: ${token.totalAmount}
-//     //         Previous Boost: ${existingToken.boostAmount}
-//     //         First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCString()}
-//     //         Dexscreener URL: ${token.url}
-//     //     `;
-//     //     existingToken.boostAmount = token.totalAmount; // Update existing token's boost amount
-//     // }
+// };
 
-// //     // Send message to the user if there's a message to send
-// //     if(process.env.NODE_ENV === "development"){
-// //         // Chat ID of MaestroSniperBot
-// // const chatId = '@MaestroSniperBot';
+// sendMessage(token.tokenAddress);
 
-// // // Function to send a message
-// // const sendMessage = (tokenAddress) => {
-// //     bot.sendMessage(chatId, `Token: ${tokenAddress}`)
-// //         .then(() => {
-// //             console.log('Message sent successfully to Maestro.');
-// //         })
-// //         .catch((error) => {
-// //             console.error('Failed to send message to Maestro:', error);
-// //         });
-// // };
-
-// // sendMessage(token.tokenAddress);
-
-// //     }
+//     }
 //     if (message) {        
 //         try {            
 //             // Send photo with caption using sendPhoto method
@@ -414,7 +414,109 @@ const sendNewTokenMessage = async (user, token) => {
     const imageUrl = token.profile.banner ? token.profile.banner : token.profile.icon; // Assume this URL comes from the Dex API
     
     // Other code continues...
-    // ...
+    if (!existingToken) {
+        // New token notification
+        
+const socials = tokenDetails.info.socials || null;
+
+// Check if there are any socials with a valid URL
+const hasValidUrls = socials?.some(social => social.url);
+let socialLinks = null;
+// If no valid URLs are found, return null or handle accordingly
+if (hasValidUrls) {
+            // Loop through socials and generate the Markdown string
+     socialLinks = socials?.map(social => {
+    const type = social.type;  // Social type, e.g., "Twitter"
+    const url = social.url;    // Social URL, e.g., "https://twitter.com/token"    
+    // Return formatted MarkdownV2 link for each social
+    return `🔗 [${type.charAt(0).toUpperCase() + type.slice(1)}](${url.replace(/_/g, '\\_')})`;
+}).join('\n');
+}
+
+const websites = tokenDetails.info.websites || null;
+
+// Check if there are any socials with a valid URL
+const hasValidWebsiteUrls = websites?.some(website => website.url);
+let websiteLinks = null;
+// If no valid URLs are found, return null or handle accordingly
+if (hasValidWebsiteUrls) {
+            // Loop through socials and generate the Markdown string
+            websiteLinks = websites?.map(website => {
+    const label = website.label;  
+    const url = website.url;        
+    // Return formatted MarkdownV2 link for each social
+    return `🔗 [${label.charAt(0).toUpperCase() + label.slice(1)}](${url.replace(/_/g, '\\_')})`;
+}).join('\n');
+}
+
+
+        message = `   
+💎Newly Launched Gem Alert
+🔗Chain: ${token.chainId.charAt(0).toUpperCase() + token.chainId.slice(1)}
+💊Platform: ${token.dexId.charAt(0).toUpperCase() + tokenDetails.dexId.slice(1)} 
+
+💰${token.baseToken.name} (${token.baseToken.symbol})
+
+${user.isAdmin?`First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCString()}\n \n`:''}📝Token address: \`${token.baseToken.address}\`                         
+
+💲Call Mc: ${formatNumber(token.marketCap)}
+📛Volume:
+5M: ${formatNumber(token.volume.m5)} | 1H: ${formatNumber(token.volume.h1)} | 6H: ${formatNumber(token.volume.h6)} | 24H: ${formatNumber(token.volume.h24)}
+🔑Liquidity: ${formatNumber(token.liquidity.usd)} 
+
+Price Change:
+5M: ${token.priceChange.m5}% | 1H: ${token.priceChange.h1}% | 6H: ${token.priceChange.h6}% | 24H: ${token.priceChange.h24}%
+
+${socialLinks?`Links: \n${socialLinks}\n`:``}${websiteLinks?`${websiteLinks}\n \n`:``}💫 Dexscreener URL: ${token.url}
+        `;
+//         *New boost found for ${tokenDetails.baseToken.name} (${tokenDetails.baseToken.symbol}):*
+//             Token Address: ${token.tokenAddress}
+//             Total Boost: ${token.totalAmount}
+//             Call MC: ${formatNumber(tokenDetails.marketCap)}
+// First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCString()}    
+//         Dexscreener URL: ${token.url}
+        user.tokensReceived.push({
+            tokenAddress: token.baseToken.address,
+            name: token.baseToken.name,
+            symbol: token.baseToken.symbol,
+            marketCap: token.marketCap,
+            websites: token.info.websites,
+            socials: token.info.socials,
+        });
+    } 
+    // else if (existingToken.boostAmount !== token.totalAmount) {
+    //     // Boost has changed, notify user
+    //     message = `
+    //         *Modified boost found for ${tokenDetails.baseToken.name} (${tokenDetails.baseToken.symbol}):*
+    //         Token Address: ${token.tokenAddress}
+    //         Call MC: ${formatNumber(tokenDetails.marketCap)}
+    //         Updated Boost: ${token.totalAmount}
+    //         Previous Boost: ${existingToken.boostAmount}
+    //         First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCString()}
+    //         Dexscreener URL: ${token.url}
+    //     `;
+    //     existingToken.boostAmount = token.totalAmount; // Update existing token's boost amount
+    // }
+
+//     // Send message to the user if there's a message to send
+//     if(process.env.NODE_ENV === "development"){
+//         // Chat ID of MaestroSniperBot
+// const chatId = '@MaestroSniperBot';
+
+// // Function to send a message
+// const sendMessage = (tokenAddress) => {
+//     bot.sendMessage(chatId, `Token: ${tokenAddress}`)
+//         .then(() => {
+//             console.log('Message sent successfully to Maestro.');
+//         })
+//         .catch((error) => {
+//             console.error('Failed to send message to Maestro:', error);
+//         });
+// };
+
+// sendMessage(token.tokenAddress);
+
+//     }
     
     if (message) {        
         try {            
