@@ -94,7 +94,7 @@ const monitorBoostsOverThreshold = async () => {
         for(const user of adminUsers){
             const newTokens = await getNewTokensSolana();
             for(const token of newTokens){
-                await sendNewTokenMessage(user, token);
+                if(token.marketCap<50000)await sendNewTokenMessage(user, token);                
             }
         }
 
