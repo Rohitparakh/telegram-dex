@@ -25,8 +25,7 @@ const includeNewTokens = false;   // Set to true if you want to include new sola
 const getTokensWithBoostsOverThreshold = async () => {
     try {
         logger(`Fetching token boosts from ${BOOSTS_URL}...`);
-        logger(`PROCESS ENV: ${process.env.NODE_ENV}`);
-        logger(`TG BOT TOKEN: ${process.env.TELEGRAM_BOT_TOKEN}`);
+        logger(`PROCESS ENV: ${process.env.NODE_ENV}`);        
         const response = await axios.get(BOOSTS_URL);
 
         if (response.status === 200) {
