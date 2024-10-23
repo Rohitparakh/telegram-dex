@@ -462,7 +462,6 @@ ${user.isAdmin?`First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCSt
 💲Call Mc: ${formatNumber(token.marketCap)}
 📛Volume:
 5M: ${formatNumber(token.volume.m5)} | 1H: ${formatNumber(token.volume.h1)} | 6H: ${formatNumber(token.volume.h6)} | 24H: ${formatNumber(token.volume.h24)}
-🔑Liquidity: ${formatNumber(token.liquidity.usd)} 
 
 Price Change:
 5M: ${token.priceChange.m5}% | 1H: ${token.priceChange.h1}% | 6H: ${token.priceChange.h6}% | 24H: ${token.priceChange.h24}%
