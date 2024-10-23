@@ -3,7 +3,10 @@ const { logger } = require('../utils/logger');
 
 // API URL for fetching token boosts
 const BOOSTS_URL = 'https://api.dexscreener.com/token-boosts/latest/v1';
+const NEW_TOKEN_URL = 'https://api.moonshot.cc/tokens/v1/new/solana';
 
+// Market Cap threshold for tokens
+const NEW_TOKEN_MARKET_CAP = 50000;
 // Boost thresholds for different chains
 const BOOST_THRESHOLD_SOLANA = 400;
 const BOOST_THRESHOLD_SUI = 100;
@@ -15,6 +18,7 @@ const BOOST_CHAIN_ID_SUI = 'sui';
 // Boolean variables to control filtering for Solana and Sui tokens
 const includeSolanaTokens = true; // Set to true if you want to include Solana tokens
 const includeSuiTokens = false;   // Set to true if you want to include Sui tokens
+const includeNewTokens = false;   // Set to true if you want to include new solana tokens
 
 
 // Fetch tokens with boosts over the defined threshold for Solana and Sui
@@ -59,6 +63,35 @@ const getTokensWithBoostsOverThreshold = async () => {
     }
 };
 
+// Fetch tokens with boosts over the defined threshold for Solana and Sui
+const getNewTokensSolana = async () => {
+    try {
+        logger(`Fetching new tokens from ${NEW_TOKEN_URL}...`);                
+        const response = await axios.get(NEW_TOKEN_URL);
+
+        if (response.status === 200) {
+            const tokens = response.data;
+
+            let newTokens = [];
+            // Filter tokens based on chain and threshold for Solana
+            if(includeNewTokens){
+                newTokens = tokens.filter(token => token.marketCap && token.marketCap < NEW_TOKEN_MARKET_CAP);
+            }
+
+            logger(`${newTokens.length} Solana tokens found over the threshold.`);
+
+            return newTokens;
+        } else {
+            logger(`Error fetching token boosts: ${response.status}`);
+            return [];
+        }
+    } catch (error) {
+        logger(`Error occurred: ${error.message}`);
+        return [];
+    }
+};
+
 module.exports = {
-    getTokensWithBoostsOverThreshold
+    getTokensWithBoostsOverThreshold,
+    getNewTokensSolana
 };

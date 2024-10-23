@@ -1,11 +1,50 @@
+const mongoose = require('mongoose');
+const { Telegraf } = require('telegraf');
 const connectDB = require('./config/db');
-const { getTokensWithBoostsOverThreshold } = require('./services/boostService');
-const { sendTokenBoostMessage } = require('./services/tokenService');
+const { getTokensWithBoostsOverThreshold, getNewTokensSolana } = require('./services/boostService');
+const { sendTokenBoostMessage, sendNewTokenMessage } = require('./services/tokenService');
 const User = require('./models/userModel');
 const Token = require('./models/tokenModel');
 const { logger } = require('./utils/logger');
-// const Token = require('./models/tokenModel'); // Adjust the path according to your file structure
 const bot = require('./bot/telegramBot'); // Import the bot instance
+
+
+
+// async function fetchAndUpdateUsernames() {
+//     try {
+//         const bot = new Telegraf(process.env.TELEGRAM_BOT_TOKEN);
+//         // Connect to MongoDB
+//         await mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+//         console.log('Connected to MongoDB');
+
+//         // Fetch all users from the database
+//         const users = await User.find({}); // Only fetch users without usernames
+
+//         for (const user of users) {
+//             try {
+//                 // Fetch user info from Telegram
+//                 console.log(user?.chatId)
+//                 console.log(user?.username)
+//                 const chat = await bot.telegram.getChat(user.chatId);
+//                 const username = chat.username ? chat.username : null;
+
+//                 // Update the user's username in the database
+//                 await User.updateOne({ chatId: user.chatId }, { username: username });
+//                 console.log(`Updated chatId: ${user.chatId} with username: ${username}`);
+//             } catch (error) {
+//                 console.error(`Error fetching user ${user.chatId}:`, error);
+//             }
+//         }
+
+//         console.log('All users processed');
+//     } catch (error) {
+//         console.error('Error connecting to MongoDB:', error);
+//     } finally {
+//         // Close MongoDB connection
+//         await mongoose.connection.close();
+//         console.log('MongoDB connection closed');
+//     }
+// }
 
 async function deleteAllUsers() {
     try {
@@ -44,19 +83,33 @@ const monitorBoostsOverThreshold = async () => {
     setInterval(async () => {
         const tokens = await getTokensWithBoostsOverThreshold();
         const subscribedUsers = await User.find({ isSubscribed: true });
+        const adminUsers = await User.find({ isAdmin: true });
 
         for (const token of tokens) {
             for (const user of subscribedUsers) {
                 await sendTokenBoostMessage(user, token);
             }
         }
+
+        for(const user of adminUsers){
+            const newTokens = await getNewTokensSolana();
+            for(const token of newTokens){
+                await sendNewTokenMessage(user, token);
+            }
+        }
+
     }, BOOST_CHECK_INTERVAL);
 };
 
 // Start monitoring
 monitorBoostsOverThreshold();
+// fetchAndUpdateUsernames();
 // deleteAllTokens();
 // deleteAllUsers();
+
+
+
+
 
 // const axios = require('axios');
 // const TelegramBot = require('node-telegram-bot-api');
