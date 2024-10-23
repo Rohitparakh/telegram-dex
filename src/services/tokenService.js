@@ -479,8 +479,6 @@ Price Change:
             name: token.baseToken.name,
             symbol: token.baseToken.symbol,
             marketCap: token.marketCap,
-            websites: token.info.websites,
-            socials: token.info.socials,
         });
     } 
     // else if (existingToken.boostAmount !== token.totalAmount) {
