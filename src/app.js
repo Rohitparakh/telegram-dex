@@ -83,7 +83,7 @@ const monitorBoostsOverThreshold = async () => {
     setInterval(async () => {
         const tokens = await getTokensWithBoostsOverThreshold();
         const subscribedUsers = await User.find({ isSubscribed: true });
-        const adminUsers = await User.find({ isAdmin: true });
+        // const adminUsers = await User.find({ isAdmin: true });
 
         for (const token of tokens) {
             for (const user of subscribedUsers) {
@@ -91,12 +91,12 @@ const monitorBoostsOverThreshold = async () => {
             }
         }
 
-        for(const user of adminUsers){
-            const newTokens = await getNewTokensSolana();
-            for(const token of newTokens){
-                if(token.marketCap<50000)await sendNewTokenMessage(user, token);                
-            }
-        }
+        // for(const user of adminUsers){
+        //     const newTokens = await getNewTokensSolana();
+        //     for(const token of newTokens){
+        //         if(token.marketCap<50000)await sendNewTokenMessage(user, token);                
+        //     }
+        // }
 
     }, BOOST_CHECK_INTERVAL);
 };
