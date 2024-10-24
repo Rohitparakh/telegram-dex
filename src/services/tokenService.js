@@ -10,12 +10,12 @@ const TOKEN_DETAILS_URL = 'https://api.dexscreener.com/latest/dex/tokens';
 const sendTokenBoostMessage = async (user, token) => {
     // Token is from DexScreener API that gives latest boosts, User is User collection from MongoDB
     const formattedTokenAddress = formatTokenAddress(token.tokenAddress);
-    // logger(token.tokenAddress);
+    logger(token.tokenAddress);
     const existingToken = user.tokensReceived.find(t => t.tokenAddress === token.tokenAddress);
-    // logger(`Existing token found for ${user.username?user.username:'user'}: ${existingToken ? formattedTokenAddress : 'None'}`);
+    logger(`Existing token found for ${user.username?user.username:'user'}: ${existingToken ? formattedTokenAddress : 'None'}`);
     if(existingToken)return;
 
-    // logger(`Fetching token details from ${TOKEN_DETAILS_URL} for ${formatTokenAddress(token.tokenAddress)}`);
+    logger(`Fetching token details from ${TOKEN_DETAILS_URL} for ${formatTokenAddress(token.tokenAddress)}`);
     const response = await axios.get(`${TOKEN_DETAILS_URL}/${token.tokenAddress}`);    
     const tokenDetails = response.data.pairs[0];
     // logger(tokenDetails.info.websites[0].url)
