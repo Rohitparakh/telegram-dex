@@ -20,6 +20,7 @@
     "mongodb": "^6.9.0",
     "mongoose": "^8.7.1",
     "moralis": "^2.27.2",
+    "node-cron": "^3.0.3",
     "node-fetch": "^2.7.0",
     "node-telegram-bot-api": "^0.66.0"
   }

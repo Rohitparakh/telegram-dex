@@ -6,6 +6,9 @@ const Token = require('./models/tokenModel');
 const { logger } = require('./utils/logger');
 // const Token = require('./models/tokenModel'); // Adjust the path according to your file structure
 const bot = require('./bot/telegramBot'); // Import the bot instance
+const { MongoClient } = require('mongodb');
+const cron = require('node-cron');
+
 
 async function deleteAllUsers() {
     try {
@@ -50,3 +53,47 @@ const monitorBoostsOverThreshold = async () => {
 monitorBoostsOverThreshold();
 // deleteAllTokens();
 // deleteAllUsers();
+
+
+
+async function cleanTokensReceived() {    
+    const client = new MongoClient(process.env.MONGO_URI);
+        
+    try {
+        await client.connect();
+        const db = client.db("test"); // Replace with your database name
+        const usersCollection = db.collection("users");
+
+        // Find all users
+        const users = await usersCollection.find({}).toArray();
+
+        for (const user of users) {
+            const tokens = user.tokensReceived || [];
+            console.log(user.username)
+            // Only proceed if there are more than 20 tokens
+            if (tokens.length > 20) {
+                // Keep only the last 20 tokens
+                const tokensToKeep = tokens.slice(-20);
+
+                // Update the user's tokensReceived field
+                await usersCollection.updateOne(
+                    { _id: user._id },
+                    { $set: { tokensReceived: tokensToKeep } }
+                );
+            }
+        }
+
+        console.log("Tokens cleaned up for all users.");
+    } catch (error) {
+        console.error("Error cleaning tokens:", error);
+    } finally {
+        await client.close();
+    }
+}
+
+// Schedule the cleanup to run every 2 days at midnight
+cron.schedule('0 0 */2 * *', () => {
+    console.log("Running scheduled cleanup...");
+    cleanTokensReceived();
+  });
+  
