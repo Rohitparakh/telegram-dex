@@ -1,6 +1,7 @@
 const connectDB = require('./config/db');
 const { getTokensWithBoostsOverThreshold } = require('./services/boostService');
-const { sendTokenBoostMessage } = require('./services/tokenService');
+const { getNewTokens } = require('./services/newTokenService');
+const { sendTokenBoostMessage, sendNewTokenMessage } = require('./services/tokenService');
 const User = require('./models/userModel');
 const Token = require('./models/tokenModel');
 const { logger } = require('./utils/logger');
@@ -49,8 +50,23 @@ const monitorBoostsOverThreshold = async () => {
     }, BOOST_CHECK_INTERVAL);
 };
 
+// Function to get new tokens
+const monitorNewTokens = async () => {
+    setInterval(async () => {
+        const tokens = await getNewTokens();
+        const adminUsers = await User.find({ isAdmin: true });
+
+        for (const token of tokens) {
+            for (const user of adminUsers) {
+                await sendNewTokenMessage(user, token);
+            }
+        }
+    }, BOOST_CHECK_INTERVAL);
+};
+
 // Start monitoring
 monitorBoostsOverThreshold();
+monitorNewTokens();
 // deleteAllTokens();
 // deleteAllUsers();
 
