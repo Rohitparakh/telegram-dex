@@ -264,7 +264,7 @@ if (hasValidWebsiteUrls) {
 
 💰${tokenDetails.baseToken.name} (${tokenDetails.baseToken.symbol})
 
-${user.isAdmin?`Total Boost: ${token.totalAmount} \n First Fetched At: ${new Date(tokenFromDB.firstFetchedAt).toUTCString()}\n \n`:''}📝Token address: \`${token.tokenAddress}\`                         
+📝Token address: \`${token.tokenAddress}\`                         
 
 💲Call Mc: ${formatNumber(tokenDetails.marketCap)}
 📛Volume:
