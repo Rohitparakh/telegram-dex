@@ -71,7 +71,6 @@ const getNewTokens = async () => {
             // console.log(filteredSolanaTokens)
 
             logger(`${filteredSolanaTokens?.length} Solana tokens found over the threshold.`);
-            console.log(filteredSolanaTokens)
 
             // Return combined results from both chains
             return filteredSolanaTokens;
