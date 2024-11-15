@@ -160,8 +160,12 @@ ${socialLinks?`Links: \n${socialLinks}\n`:``}${websiteLinks?`${websiteLinks}\n \
             logger('Token Address sent successfully');
             await user.save(); // Save user updates to MongoDB
         } catch (error) {
-            // Handle errors here
-            console.log('Error sending message to user:', user.chatId);
+            if (error.response && error.response.statusCode === 403) {
+                console.error(`User has blocked the bot: ${user.chatId}`);
+                // Mark the user as blocked in your system
+            } else {
+                console.error('An unexpected error occurred:', error);
+            }
         }
     }
 };
