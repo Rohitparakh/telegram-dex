@@ -168,6 +168,7 @@ ${socialLinks?`Links: \n${socialLinks}\n`:``}${websiteLinks?`${websiteLinks}\n \
 
 // Send notification if new or modified token
 const sendNewTokenMessage = async (user, token) => {
+    logger('Starting New Message to '+user.id)
     // Token is from DexScreener API that gives latest boosts, User is User collection from MongoDB
     const formattedTokenAddress = formatTokenAddress(token.tokenAddress);
     // logger(token.tokenAddress);
@@ -324,6 +325,7 @@ ${socialLinks?`Links: \n${socialLinks}\n`:``}${websiteLinks?`${websiteLinks}\n \
             console.log('Error sending message to user:', user.chatId);
         }
     }
+    logger('Ending New Message to '+user.id)
 };
 
 module.exports = {
