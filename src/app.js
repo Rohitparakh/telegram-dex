@@ -31,7 +31,7 @@ async function deleteAllTokens() {
 }
 
 // Constants
-const BOOST_CHECK_INTERVAL = 10 * 1000; // Check boosts every 10 seconds
+const BOOST_CHECK_INTERVAL = 60 * 1000; // Check boosts every 60 seconds
 
 // Connect to database
 connectDB();
