@@ -321,7 +321,7 @@ ${socialLinks?`Links: \n${socialLinks}\n`:``}${websiteLinks?`${websiteLinks}\n \
             await user.save(); // Save user updates to MongoDB
         } catch (error) {
             // Handle errors here
-            console.log('Error sending message to user:', error);
+            console.log('Error sending message to user:', user.chatId);
         }
     }
 };
