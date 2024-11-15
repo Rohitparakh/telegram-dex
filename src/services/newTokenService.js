@@ -85,7 +85,6 @@ const getNewTokens = async () => {
     }
 };
 
-getNewTokens();
 
 module.exports = {
     getNewTokens
