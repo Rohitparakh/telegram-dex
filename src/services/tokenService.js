@@ -189,31 +189,31 @@ const sendNewTokenMessage = async (user, token) => {
 
     // Log token to MongoDB first
     try {
-        if (tokenFromDB) {
-            // Update existing token details
-            tokenFromDB.name = tokenDetails.baseToken.name;
-            tokenFromDB.symbol = tokenDetails.baseToken.symbol;
-            tokenFromDB.marketCap = tokenDetails.marketCap;
-            tokenFromDB.websites = tokenDetails.info.websites;
-            tokenFromDB.socials = tokenDetails.info.socials;
-            tokenFromDB.boostAmount = token.totalAmount; // Update boost amount
-            tokenFromDB.firstFetchedAt = tokenFromDB.firstFetchedAt || Date.now(); // Only set if not already set
-            await tokenFromDB.save();
-        } else {
-            // Create a new token entry with firstFetchedAt
-            const newToken = new Token({
-                tokenAddress: token.tokenAddress,
-                boostAmount: token.totalAmount,
-                firstFetchedAt: new Date(), // Log the first fetched time
-                name: tokenDetails.baseToken.name,
-                symbol: tokenDetails.baseToken.symbol,
-                marketCap: tokenDetails.marketCap,
-                websites: tokenDetails.info.websites,
-                socials: tokenDetails.info.socials,
-            });
-            await newToken.save();
-            tokenFromDB = newToken; // Use the new token for further operations
-        }
+        // if (tokenFromDB) {
+        //     // Update existing token details
+        //     tokenFromDB.name = tokenDetails.baseToken.name;
+        //     tokenFromDB.symbol = tokenDetails.baseToken.symbol;
+        //     tokenFromDB.marketCap = tokenDetails.marketCap;
+        //     tokenFromDB.websites = tokenDetails.info.websites;
+        //     tokenFromDB.socials = tokenDetails.info.socials;
+        //     tokenFromDB.boostAmount = token.totalAmount; // Update boost amount
+        //     tokenFromDB.firstFetchedAt = tokenFromDB.firstFetchedAt || Date.now(); // Only set if not already set
+        //     await tokenFromDB.save();
+        // } else {
+        //     // Create a new token entry with firstFetchedAt
+        //     const newToken = new Token({
+        //         tokenAddress: token.tokenAddress,
+        //         boostAmount: token.totalAmount,
+        //         firstFetchedAt: new Date(), // Log the first fetched time
+        //         name: tokenDetails.baseToken.name,
+        //         symbol: tokenDetails.baseToken.symbol,
+        //         marketCap: tokenDetails.marketCap,
+        //         websites: tokenDetails.info.websites,
+        //         socials: tokenDetails.info.socials,
+        //     });
+        //     await newToken.save();
+        //     tokenFromDB = newToken; // Use the new token for further operations
+        // }
     } catch (error) {
         logger('Error saving token:', error);
         return; // Exit the function if the token logging fails
@@ -221,7 +221,7 @@ const sendNewTokenMessage = async (user, token) => {
 
     let message = '';
     const imageUrl = token.header? token.header: token.icon; // Assume this URL comes from the Dex API
-    if (!existingToken && tokenDetails.marketCap<=1000000) {
+    // if (!existingToken && tokenDetails.marketCap<=1000000) {
         // New token notification
         
 const socials = tokenDetails.info.socials;
@@ -291,7 +291,7 @@ ${socialLinks?`Links: \n${socialLinks}\n`:``}${websiteLinks?`${websiteLinks}\n \
             websites: tokenDetails.info.websites,
             socials: tokenDetails.info.socials,
         });
-    } 
+    // } 
     // else if (existingToken.boostAmount !== token.totalAmount) {
     //     // Boost has changed, notify user
     //     message = `
