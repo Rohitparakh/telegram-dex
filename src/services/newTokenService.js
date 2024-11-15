@@ -5,6 +5,7 @@ const { logger } = require('../utils/logger');
 const BOOSTS_URL = 'https://api.dexscreener.com/token-profiles/latest/v1';
 const TOKEN_DETAILS_URL = 'https://api.dexscreener.com/latest/dex/tokens';
 const MARKET_CAP_THRESHOLD = 80000;
+const LIQUIDITY_THRESHOLD = 5000;
 // Boost thresholds for different chains
 // const BOOST_THRESHOLD_SOLANA = 400;
 // const BOOST_THRESHOLD_SUI = 100;
@@ -17,17 +18,20 @@ const BOOST_CHAIN_ID_SOLANA = 'solana';
 const includeSolanaTokens = true; // Set to true if you want to include Solana tokens
 // const includeSuiTokens = false;   // Set to true if you want to include Sui tokens
 
-const getMarketCap = async (tokenAddress) => {
+const getMCL = async (tokenAddress) => {
     const response = await axios.get(`${TOKEN_DETAILS_URL}/${tokenAddress}`);  
-    return response.data.pairs[0].marketCap
+    return {
+        marketCap:response.data.pairs[0].marketCap,
+        liquidity: response.data.pairs[0].liquidity.usd
+    }
 }
 
 // Fetch tokens with boosts over the defined threshold for Solana and Sui
 const getNewTokens = async () => {
     try {
-        logger(`Fetching token boosts from ${BOOSTS_URL}...`);
-        logger(`PROCESS ENV: ${process.env.NODE_ENV}`);
-        logger(`TG BOT TOKEN: ${process.env.TELEGRAM_BOT_TOKEN}`);
+        // logger(`Fetching token boosts from ${BOOSTS_URL}...`);
+        // logger(`PROCESS ENV: ${process.env.NODE_ENV}`);
+        // logger(`TG BOT TOKEN: ${process.env.TELEGRAM_BOT_TOKEN}`);
         const response = await axios.get(BOOSTS_URL);
 
         if (response.status === 200) {
@@ -38,9 +42,16 @@ const getNewTokens = async () => {
                  filteredSolanaTokens = (
                     await Promise.all(
                         tokens.map(async (token) => {
-                            let marketCap = await getMarketCap(token.tokenAddress);
-                            if(marketCap <= MARKET_CAP_THRESHOLD) token.marketCap = marketCap;
-                            return marketCap <= MARKET_CAP_THRESHOLD ? token: null; // Return token if condition matches, else null
+                            const tokenDetails = await getMCL(token.tokenAddress);
+                            const { marketCap, liquidity } = tokenDetails;
+                            if(marketCap <= MARKET_CAP_THRESHOLD && liquidity >= LIQUIDITY_THRESHOLD) {
+                                token.marketCap = marketCap;
+                                token.liquidity = liquidity;
+                                return token
+                            } else{
+                                return null
+                            }
+                            
                         })
                     )
                 ).filter((token) => token !== null); // Filter out null values
@@ -59,9 +70,8 @@ const getNewTokens = async () => {
 
             // console.log(filteredSolanaTokens)
 
-
-            logger(`${JSON.stringify(filteredSolanaTokens[0], null, 2)} `);
             logger(`${filteredSolanaTokens?.length} Solana tokens found over the threshold.`);
+            console.log(filteredSolanaTokens)
 
             // Return combined results from both chains
             return filteredSolanaTokens;
@@ -75,6 +85,7 @@ const getNewTokens = async () => {
     }
 };
 
+getNewTokens();
 
 module.exports = {
     getNewTokens
