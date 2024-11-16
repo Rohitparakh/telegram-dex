@@ -66,7 +66,6 @@ const monitorNewTokens = async () => {
 
 // Start monitoring
 monitorBoostsOverThreshold();
-monitorNewTokens();
 // deleteAllTokens();
 // deleteAllUsers();
 
