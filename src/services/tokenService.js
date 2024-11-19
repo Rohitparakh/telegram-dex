@@ -125,8 +125,17 @@ ${socialLinks?`Links: \n${socialLinks}\n`:``}${websiteLinks?`${websiteLinks}\n \
                 await user.save();
 
             }else if(error.response && error.response.statusCode === 400){
-                console.error(`Bad Image URL: ${imageUrl}`);
-                console.error(token);
+                console.error(`Invalid Image URL, might be webp: ${imageUrl}`);
+                logger(`Retrying sending without image...`);
+
+                await bot.sendMessage(user.chatId, message, {
+                    parse_mode: 'Markdown',
+                    disable_web_page_preview: true
+                })
+
+                logger('Message without image sent successfully');
+                logger('Token Address sent successfully');
+                await user.save(); // Save user updates to MongoDB
 
             } else {
                 // console.error('An unexpected error occurred:', error);
