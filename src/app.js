@@ -40,7 +40,7 @@ connectDB();
 const monitorBoostsOverThreshold = async () => {
     setInterval(async () => {
         const tokens = await getTokensWithBoostsOverThreshold();
-        const subscribedUsers = await User.find({ isSubscribed: true });
+        const subscribedUsers = await User.find({ isSubscribed: true, isBlocked: false });
 
         for (const token of tokens) {
             for (const user of subscribedUsers) {
