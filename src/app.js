@@ -44,7 +44,6 @@ const monitorBoostsOverThreshold = async () => {
 
         for (const token of tokens) {
             for (const user of subscribedUsers) {
-                logger("From App.js USERNAME:", user.username)
                 await sendTokenBoostMessage(user, token);
             }
         }

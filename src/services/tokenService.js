@@ -108,6 +108,9 @@ ${socialLinks?`Links: \n${socialLinks}\n`:``}${websiteLinks?`${websiteLinks}\n \
     if (message) {        
         try {         
             logger("Image URL: ",imageUrl)
+            if(!imageUrl){
+                logger(token)
+            }
             await bot.sendPhoto(user.chatId, imageUrl, {
                 caption: message,
                 parse_mode: 'Markdown',
