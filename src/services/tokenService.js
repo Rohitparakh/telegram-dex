@@ -46,7 +46,8 @@ const sendTokenBoostMessage = async (user, token) => {
     }
 
     let message = '';
-    const imageUrl = token.header? token.header: token.icon; // Assume this URL comes from the Dex API
+    let imageUrl = token.header? token.header: token.icon; // Assume this URL comes from the Dex API
+    imageUrl ===''? (imageUrl = token.icon) : null;
     if (!existingToken && tokenDetails.marketCap<=1000000 && tokenDetails.liquidity.usd>=15000) {
         
 const socials = tokenDetails.info.socials;
