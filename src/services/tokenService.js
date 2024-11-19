@@ -107,12 +107,11 @@ ${socialLinks?`Links: \n${socialLinks}\n`:``}${websiteLinks?`${websiteLinks}\n \
 
     if (message) {        
         try {         
-            logger(imageUrl);   
             await bot.sendPhoto(user.chatId, imageUrl, {
                 caption: message,
                 parse_mode: 'Markdown',
                 disable_web_page_preview: true
-            }).catch(console.error);
+            });
 
             logger('Message with image sent successfully');
             logger('Token Address sent successfully');
