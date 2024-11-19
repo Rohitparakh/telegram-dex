@@ -108,9 +108,6 @@ ${socialLinks?`Links: \n${socialLinks}\n`:``}${websiteLinks?`${websiteLinks}\n \
     if (message) {        
         try {         
             logger("Image URL: ",imageUrl)
-            if(!imageUrl){
-                logger(token)
-            }
             await bot.sendPhoto(user.chatId, imageUrl, {
                 caption: message,
                 parse_mode: 'Markdown',
@@ -126,8 +123,12 @@ ${socialLinks?`Links: \n${socialLinks}\n`:``}${websiteLinks?`${websiteLinks}\n \
                 user.isBlocked = true;
                 await user.save();
 
+            }else if(error.response && error.response.statusCode === 400){
+                console.error(`Bad Image URL: ${imageUrl}`);
+                console.error(token);
+
             } else {
-                console.error('An unexpected error occurred:', error);
+                // console.error('An unexpected error occurred:', error);
             }
         }
     }
