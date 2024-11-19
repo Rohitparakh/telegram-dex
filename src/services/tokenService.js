@@ -119,6 +119,9 @@ ${socialLinks?`Links: \n${socialLinks}\n`:``}${websiteLinks?`${websiteLinks}\n \
         } catch (error) {
             if (error.response && error.response.statusCode === 403) {
                 console.error(`User has blocked the bot: ${user.chatId}`);
+                user.isBlocked = true;
+                await user.save();
+
             } else {
                 console.error('An unexpected error occurred:', error);
             }
