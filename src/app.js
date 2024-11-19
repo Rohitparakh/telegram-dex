@@ -44,6 +44,7 @@ const monitorBoostsOverThreshold = async () => {
 
         for (const token of tokens) {
             for (const user of subscribedUsers) {
+                logger("From App.js USERNAME:", user.username)
                 await sendTokenBoostMessage(user, token);
             }
         }
@@ -69,6 +70,10 @@ monitorBoostsOverThreshold();
 // deleteAllTokens();
 // deleteAllUsers();
 
+bot.on('polling_error', (error) => {
+    console.error('Polling error:', error.response.body);
+  });
+  
 
 
 async function cleanTokensReceived() {    
@@ -105,6 +110,35 @@ async function cleanTokensReceived() {
         await client.close();
     }
 }
+
+async function addisBlocked() {    
+    const client = new MongoClient(process.env.MONGO_URI);
+        
+    try {
+        await client.connect();
+        const db = client.db("test"); // Replace with your database name
+        const usersCollection = db.collection("users");
+
+        // Find all users
+        const users = await usersCollection.find({}).toArray();
+
+        for (const user of users) {
+            console.log(user.username)
+
+                await usersCollection.updateOne(
+                    { _id: user._id },
+                    { $set: { isBlocked: false } }
+                );
+        }
+
+        console.log("Tokens cleaned up for all users.");
+    } catch (error) {
+        console.error("Error cleaning tokens:", error);
+    } finally {
+        await client.close();
+    }
+}
+
 
 // Schedule the cleanup to run every 2 days at midnight
 cron.schedule('0 0 */2 * *', () => {
